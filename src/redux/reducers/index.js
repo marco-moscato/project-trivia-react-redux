@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import { player } from '../actions';
 
 const rootReducer = combineReducers({
-  chaves,
+  player,
 });
 
 export default rootReducer;
