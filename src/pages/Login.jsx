@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { player } from '../redux/actions';
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
     email: '',
     name: '',
@@ -31,11 +34,18 @@ export default class Login extends Component {
     );
   };
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const { email, name } = this.state;
+    const { dispatch } = this.props;
+    dispatch(player(email, name));
+  };
+
   render() {
     const { name, email, block } = this.state;
     return (
       <div>
-        <form>
+        <form onSubmit={ this.handleSubmit }>
           <input
             data-testid="input-player-name"
             type="text"
@@ -50,11 +60,7 @@ export default class Login extends Component {
             value={ email }
             onChange={ this.handleChange }
           />
-          <button
-            data-testid="btn-play"
-            type="submit"
-            disabled={ block }
-          >
+          <button data-testid="btn-play" type="submit" disabled={ block }>
             Play
           </button>
         </form>
@@ -62,3 +68,9 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+export default connect()(Login);
