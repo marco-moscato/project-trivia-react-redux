@@ -24,14 +24,9 @@ class Login extends Component {
 
   handleChange = ({ target }) => {
     const { name, value } = target;
-    this.setState(
-      {
-        [name]: value,
-      },
-      () => {
-        this.validateForm();
-      },
-    );
+    this.setState({
+      [name]: value,
+    }, () => this.validateForm());
   };
 
   handleSubmit = (event) => {
@@ -39,6 +34,12 @@ class Login extends Component {
     const { email, name } = this.state;
     const { dispatch } = this.props;
     dispatch(player(email, name));
+  };
+
+  settingsScreen = (event) => {
+    event.preventDefault();
+    const { history } = this.props;
+    history.push('/settings');
   };
 
   render() {
@@ -64,13 +65,23 @@ class Login extends Component {
             Play
           </button>
         </form>
+        <button
+          data-testid="btn-settings"
+          type="submit"
+          onClick={ this.settingsScreen }
+        >
+          Configurações
+        </button>
       </div>
     );
   }
 }
 
 Login.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+  dispatch: PropTypes.func,
+}.isRequired;
 
 export default connect()(Login);
