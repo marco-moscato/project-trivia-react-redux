@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { player } from '../redux/actions';
+import { apiTrivia } from '../services/api';
 
 class Login extends Component {
   state = {
@@ -42,6 +43,16 @@ class Login extends Component {
     history.push('/settings');
   };
 
+  onClickBtnPlay = async (event) => {
+    event.preventDefault();
+
+    const { history } = this.props;
+    const tokenApi = await apiTrivia();
+
+    localStorage.setItem('token', tokenApi);
+    history.push('/game');
+  };
+
   render() {
     const { name, email, block } = this.state;
     return (
@@ -61,7 +72,12 @@ class Login extends Component {
             value={ email }
             onChange={ this.handleChange }
           />
-          <button data-testid="btn-play" type="submit" disabled={ block }>
+          <button
+            data-testid="btn-play"
+            type="submit"
+            disabled={ block }
+            onClick={ this.onClickBtnPlay }
+          >
             Play
           </button>
         </form>
