@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class Feedback extends Component {
@@ -11,6 +12,16 @@ class Feedback extends Component {
         <p data-testid="feedback-text">
           {assertions < MIN_ASSERTIONS ? 'Could be better...' : 'Well Done!'}
         </p>
+        <Link to="/">
+          <button data-testid="btn-play-again" type="button">
+            Play Again
+          </button>
+        </Link>
+        <Link to="/ranking">
+          <button data-testid="btn-ranking" type="button">
+            Ranking
+          </button>
+        </Link>
       </div>
     );
   }
