@@ -30,11 +30,14 @@ class Login extends Component {
     }, () => this.validateForm());
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     const { email, name } = this.state;
-    const { dispatch } = this.props;
+    const { dispatch, history } = this.props;
+    const tokenApi = await apiTrivia();
     dispatch(player(email, name));
+    localStorage.setItem('token', tokenApi);
+    history.push('/game');
   };
 
   settingsScreen = (event) => {
@@ -43,15 +46,15 @@ class Login extends Component {
     history.push('/settings');
   };
 
-  onClickBtnPlay = async (event) => {
-    event.preventDefault();
+  // onClickBtnPlay = async (event) => {
+  //   event.preventDefault();
 
-    const { history } = this.props;
-    const tokenApi = await apiTrivia();
+  //   const { history } = this.props;
+  //   const tokenApi = await apiTrivia();
 
-    localStorage.setItem('token', tokenApi);
-    history.push('/game');
-  };
+  //   localStorage.setItem('token', tokenApi);
+  //   history.push('/game');
+  // };
 
   render() {
     const { name, email, block } = this.state;
@@ -76,7 +79,7 @@ class Login extends Component {
             data-testid="btn-play"
             type="submit"
             disabled={ block }
-            onClick={ this.onClickBtnPlay }
+            // onClick={ this.onClickBtnPlay }
           >
             Play
           </button>
