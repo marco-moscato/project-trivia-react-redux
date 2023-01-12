@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Header from '../components/Header';
 
-export default class Game extends Component {
+class Game extends Component {
   render() {
     return (
-      <div>Game</div>
+      <>
+        <Header />
+        <div>Game</div>
+      </>
     );
   }
 }
+
+export default connect()(Game);
