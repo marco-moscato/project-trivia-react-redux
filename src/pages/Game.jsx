@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import { tQuestions } from '../services/api';
 
@@ -14,8 +15,13 @@ class Game extends Component {
   }
 
   async componentDidMount() {
+    const { history } = this.props;
     const token = localStorage.getItem('token');
     const api = await tQuestions(token);
+    if (api.length === 0) {
+      localStorage.removeItem('token');
+      history.push('/');
+    }
     this.setState({
       response: api,
       isLoading: false,
@@ -49,16 +55,22 @@ class Game extends Component {
                     {response[questionIndex].category}
                   </h2>
                   <h2 data-testid="question-text">{response[questionIndex].question}</h2>
-                  {console.log(response[questionIndex].incorrect_answers)}
-                  {this.shuffle(response[questionIndex].incorrect_answers)
-                    .map((answer, index) => (
-                      <button
-                        type="button"
-                        key={ index }
-                      >
-                        {answer}
-                      </button>))}
-                  <button type="button">{response[questionIndex].correct_answer}</button>
+                  <div data-testid="answer-options">
+                    {this.shuffle(response[questionIndex].incorrect_answers
+                      .concat(response[questionIndex].correct_answer))
+                      .map((answer, index) => (
+                        <button
+                          type="button"
+                          key={ index }
+                          data-testid={ answer === response[questionIndex].correct_answer
+                            ? 'correct-answer' : `wrong-answer-${index}` }
+                        >
+                          {answer}
+                          {console.log(answer)}
+                        </button>))}
+
+                  </div>
+
                   <button
                     type="button"
                     onClick={ this.handleNext }
@@ -74,5 +86,11 @@ class Game extends Component {
     );
   }
 }
+
+Game.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+}.isRequired;
 
 export default connect()(Game);
