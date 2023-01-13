@@ -15,7 +15,6 @@ const INITIAL_STATE = {
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case USER_LOGIN: {
-    console.log(action);
     return {
       ...state,
       gravatarEmail: action.payload.email,
