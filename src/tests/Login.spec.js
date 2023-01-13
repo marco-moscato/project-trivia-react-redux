@@ -89,7 +89,7 @@ describe('Testa a tela de login', () => {
     expect(screen.getByTestId('header-score')).toBeInTheDocument();
   });
 
-  it('Testa se a requisição do token', () => {
+  it('Testa se a requisição do token é feita', () => {
     renderWithRouterAndRedux(<App />)
 
     global.fetch = jest.fn().mockResolvedValue({
