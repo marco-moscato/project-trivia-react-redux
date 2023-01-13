@@ -9,6 +9,7 @@ class Game extends Component {
     this.state = {
       response: [1, 2],
       questionIndex: 0,
+      isLoading: true,
     };
   }
 
@@ -17,6 +18,7 @@ class Game extends Component {
     const api = await tQuestions(token);
     this.setState({
       response: api,
+      isLoading: false,
     });
   }
 
@@ -28,28 +30,31 @@ class Game extends Component {
   };
 
   render() {
-    const { response, questionIndex } = this.state;
+    const { response, questionIndex, isLoading } = this.state;
     return (
       <>
         <Header />
         <div>Game</div>
         <div>
-          {/* { response
-            .map(({ category, question }, index) => (
-              <div key={ index }>
-                <p data-testid="question-category">{category}</p>
-                <p data-testid="question-text">{question}</p>
-              </div>
-            ))} */}
-          <h2 data-testid="question-category">{response[questionIndex].category}</h2>
-          <h2 data-testid="question-text">{response[questionIndex].question}</h2>
-          <button
-            type="button"
-            onClick={ this.handleNext }
-          >
-            Next
-          </button>
-          { console.log(response[0]) }
+          {
+            isLoading ? 'carregando'
+              : <>
+                <h2 data-testid="question-category">
+                  {response[questionIndex].category}
+                </h2>
+                <h2 data-testid="question-text">{response[questionIndex].question}</h2>
+                {console.log(response[questionIndex].incorrect_answers)}
+                {response[questionIndex].incorrect_answers.map()}
+                <button type="button">{response[questionIndex].correct_answer}</button>
+                <button
+                  type="button"
+                  onClick={ this.handleNext }
+                >
+                  Next
+                </button>
+              </>
+          }
+
         </div>
       </>
     );
