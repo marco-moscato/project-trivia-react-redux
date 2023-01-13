@@ -8,6 +8,7 @@ class Game extends Component {
     super();
     this.state = {
       response: [1, 2],
+      questionIndex: 0,
     };
   }
 
@@ -19,20 +20,36 @@ class Game extends Component {
     });
   }
 
+  handleNext = () => {
+    const { questionIndex } = this.state;
+    this.setState({
+      questionIndex: questionIndex + 1,
+    });
+  };
+
   render() {
-    const { response } = this.state;
+    const { response, questionIndex } = this.state;
     return (
       <>
         <Header />
         <div>Game</div>
         <div>
-          { response
+          {/* { response
             .map(({ category, question }, index) => (
               <div key={ index }>
                 <p data-testid="question-category">{category}</p>
                 <p data-testid="question-text">{question}</p>
               </div>
-            ))}
+            ))} */}
+          <h2 data-testid="question-category">{response[questionIndex].category}</h2>
+          <h2 data-testid="question-text">{response[questionIndex].question}</h2>
+          <button
+            type="button"
+            onClick={ this.handleNext }
+          >
+            Next
+          </button>
+          { console.log(response[0]) }
         </div>
       </>
     );
