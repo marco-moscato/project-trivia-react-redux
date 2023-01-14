@@ -11,6 +11,7 @@ class Game extends Component {
       response: [1, 2],
       questionIndex: 0,
       isLoading: true,
+      answered: false,
     };
   }
 
@@ -32,6 +33,13 @@ class Game extends Component {
     const { questionIndex } = this.state;
     this.setState({
       questionIndex: questionIndex + 1,
+      answered: false,
+    });
+  };
+
+  handleClick = () => {
+    this.setState({
+      answered: true,
     });
   };
 
@@ -41,7 +49,7 @@ class Game extends Component {
   };
 
   render() {
-    const { response, questionIndex, isLoading } = this.state;
+    const { response, questionIndex, isLoading, answered } = this.state;
     return (
       <>
         <Header />
@@ -62,11 +70,18 @@ class Game extends Component {
                         <button
                           type="button"
                           key={ index }
+                          onClick={ this.handleClick }
+                          style={
+                            answered
+                              ? { border: answer === response[questionIndex]
+                                .correct_answer
+                                ? '3px solid rgb(6, 240, 15)' : '3px solid red' }
+                              : { border: '1px solid black' }
+                          }
                           data-testid={ answer === response[questionIndex].correct_answer
                             ? 'correct-answer' : `wrong-answer-${index}` }
                         >
                           {answer}
-                          {console.log(answer)}
                         </button>))}
 
                   </div>
