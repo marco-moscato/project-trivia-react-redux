@@ -39,10 +39,14 @@ class Game extends Component {
 
   handleNext = () => {
     const { questionIndex } = this.state;
-    this.setState({
-      questionIndex: questionIndex + 1,
-      answered: false,
-    });
+    const { history } = this.props;
+    const questionNumber = 4;
+    if (questionIndex === questionNumber) { history.push('/feedback'); } else {
+      this.setState({
+        questionIndex: questionIndex + 1,
+        answered: false,
+      });
+    }
   };
 
   handleClick = () => {

@@ -4,11 +4,17 @@ import { Link } from 'react-router-dom';
 class Ranking extends Component {
   render() {
     return (
-      <Link to="/">
-        <button data-testid="btn-go-home" type="button">
-          Go home
-        </button>
-      </Link>
+      <>
+        <h1 data-testid="ranking-title">Título</h1>
+        <Link to="/">
+
+          <button data-testid="btn-go-home" type="button">
+            Go home
+          </button>
+        </Link>
+
+      </>
+
     );
   }
 }
