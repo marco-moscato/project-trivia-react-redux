@@ -6,17 +6,17 @@
 
 .app {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   margin: 20px;
-  flex-direction: column;
   text-align: center;
 }
 
 .header {
-  display: flex;
   align-items: center;
-  justify-content: center;
+  display: flex;
   gap: 3rem;
+  justify-content: center;
 }
 
 .logo {
