@@ -45,6 +45,7 @@ class Game extends Component {
       this.setState({
         questionIndex: questionIndex + 1,
         answered: false,
+        timeout: false,
       });
     }
   };
