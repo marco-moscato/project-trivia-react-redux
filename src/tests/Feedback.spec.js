@@ -18,4 +18,10 @@ describe('Testa a tela de feedback', () => {
     const playAgainButton = screen.getByTestId('btn-play-again');
     expect(playAgainButton).toBeInTheDocument();
   });
+
+  it('Testa se a mensagem aparece na tela', () => {
+    renderWithRouterAndRedux(<App />, initialState, "/feedback");
+    const feedbackText = screen.getByTestId('feedback-text');
+    expect(feedbackText).toBeInTheDocument();
+  });
 });

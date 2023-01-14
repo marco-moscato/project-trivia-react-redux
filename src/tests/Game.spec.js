@@ -31,20 +31,44 @@ describe('Testa a tela de jogo', () => {
     localStorage.setItem('token', '4de3eccf89c72fc8d951565a09858c6c46c21e55016e31108e58dfa74cc07a42');
     
     const answer = await screen.findByTestId(CORRECT_ANSWER);
-    
+
     userEvent.click(answer);
 
     const button = await screen.findByTestId(NEXT_BUTTON);
 
     userEvent.click(button);
-    userEvent.click(answer);
-    userEvent.click(button);
-    userEvent.click(answer);
-    userEvent.click(button);
-    userEvent.click(answer);
-    userEvent.click(button);
-    userEvent.click(answer);
-    userEvent.click(button);
+
+    const answer2 = await screen.findByTestId(CORRECT_ANSWER);
+
+    userEvent.click(answer2);
+
+    const button2 = await screen.findByTestId(NEXT_BUTTON);
+
+    userEvent.click(button2);
+
+    const answer3 = await screen.findByTestId(CORRECT_ANSWER);
+
+    userEvent.click(answer3);
+
+    const button3 = await screen.findByTestId(NEXT_BUTTON);
+
+    userEvent.click(button3);
+
+    const answer4 = await screen.findByTestId(CORRECT_ANSWER);
+
+    userEvent.click(answer4);
+
+    const button4 = await screen.findByTestId(NEXT_BUTTON);
+
+    userEvent.click(button4);
+
+    const answer5 = await screen.findByTestId(CORRECT_ANSWER);
+
+    userEvent.click(answer5);
+
+    const button5 = await screen.findByTestId(NEXT_BUTTON);
+
+    userEvent.click(button5);
 
 
 
