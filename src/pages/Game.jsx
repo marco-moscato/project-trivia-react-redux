@@ -12,6 +12,7 @@ class Game extends Component {
       questionIndex: 0,
       isLoading: true,
       answered: false,
+      timeout: false,
     };
   }
 
@@ -28,6 +29,13 @@ class Game extends Component {
       isLoading: false,
     });
   }
+
+  startTimer = () => {
+    const THIRTY_SECONDS = 30000;
+    setTimeout(() => this.setState({
+      timeout: true,
+    }), THIRTY_SECONDS);
+  };
 
   handleNext = () => {
     const { questionIndex } = this.state;
@@ -49,7 +57,8 @@ class Game extends Component {
   };
 
   render() {
-    const { response, questionIndex, isLoading, answered } = this.state;
+    const { response, questionIndex, isLoading, answered, timeout } = this.state;
+    this.startTimer();
     return (
       <>
         <Header />
@@ -70,6 +79,7 @@ class Game extends Component {
                         <button
                           type="button"
                           key={ index }
+                          disabled={ timeout }
                           onClick={ this.handleClick }
                           style={
                             answered
@@ -86,15 +96,17 @@ class Game extends Component {
 
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={ this.handleNext }
-                  >
-                    Next
-                  </button>
                 </>
               )
           }
+          { answered || timeout ? (
+            <button
+              type="button"
+              data-testid="btn-next"
+              onClick={ this.handleNext }
+            >
+              Next
+            </button>) : ''}
 
         </div>
       </>
