@@ -9,7 +9,7 @@ class Header extends React.Component {
     const toHash = md5(gravatarEmail).toString();
 
     return (
-      <div>
+      <div className="header">
         <img
           data-testid="header-profile-picture"
           src={ `https://www.gravatar.com/avatar/${toHash}` }

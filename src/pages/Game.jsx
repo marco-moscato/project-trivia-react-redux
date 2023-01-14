@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import { tQuestions } from '../services/api';
+import Logo from '../trivia.png';
 
 class Game extends Component {
   constructor() {
@@ -67,7 +68,7 @@ class Game extends Component {
     return (
       <>
         <Header />
-        <div>Game</div>
+        <img src={ Logo } alt="logo" className="logo" />
         <div>
           {
             isLoading ? 'carregando'
@@ -77,7 +78,7 @@ class Game extends Component {
                     {response[questionIndex].category}
                   </h2>
                   <h2 data-testid="question-text">{response[questionIndex].question}</h2>
-                  <div data-testid="answer-options">
+                  <div data-testid="answer-options" className="answers">
                     {this.shuffle(response[questionIndex].incorrect_answers
                       .concat(response[questionIndex].correct_answer))
                       .map((answer, index) => (
@@ -86,13 +87,11 @@ class Game extends Component {
                           key={ index }
                           disabled={ timeout }
                           onClick={ this.handleClick }
-                          style={
-                            answered
-                              ? { border: answer === response[questionIndex]
-                                .correct_answer
-                                ? '3px solid rgb(6, 240, 15)' : '3px solid red' }
-                              : { border: '1px solid black' }
-                          }
+                          style={ answered
+                            ? { border: answer === response[questionIndex]
+                              .correct_answer
+                              ? '3px solid rgb(6, 240, 15)' : '3px solid red' }
+                            : { border: '3px solid black' } }
                           data-testid={ answer === response[questionIndex].correct_answer
                             ? 'correct-answer' : `wrong-answer-${index}` }
                         >
