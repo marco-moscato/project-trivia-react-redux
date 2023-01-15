@@ -4,18 +4,18 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import { tQuestions } from '../services/api';
 import Logo from '../trivia.png';
+import { updateScore } from '../redux/actions';
 
 class Game extends Component {
-  constructor() {
-    super();
-    this.state = {
-      response: [1, 2],
-      questionIndex: 0,
-      isLoading: true,
-      answered: false,
-      timeout: false,
-    };
-  }
+  state = {
+    response: [1, 2],
+    questionIndex: 0,
+    isLoading: true,
+    answered: false,
+    timeout: false,
+    assertions: 0,
+    score: 0,
+  };
 
   async componentDidMount() {
     const { history } = this.props;
@@ -51,7 +51,22 @@ class Game extends Component {
     }
   };
 
-  handleClick = () => {
+  scoreUpdate = () => {
+    const { assertions, score } = this.state;
+    const { dispatch } = this.props;
+    dispatch(updateScore(assertions, score));
+  };
+
+  handleClick = ({ target: { value } }) => {
+    const { response, questionIndex, assertions, score } = this.state;
+
+    console.log(value);
+    if (value === response[questionIndex].correct_answer) {
+      this.setState({
+        assertions: assertions + 1,
+        score: score + 1,
+      }, this.scoreUpdate);
+    }
     this.setState({
       answered: true,
     });
@@ -85,6 +100,7 @@ class Game extends Component {
                         <button
                           type="button"
                           key={ index }
+                          value={ answer }
                           disabled={ timeout }
                           onClick={ this.handleClick }
                           style={ answered
