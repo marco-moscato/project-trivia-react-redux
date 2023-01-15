@@ -51,6 +51,14 @@ class Game extends Component {
     }
   };
 
+  // Funcão para corrigir sinais gráficos como aspas e apóstrofos; Ref: https://tertiumnon.medium.com/js-how-to-decode-html-entities-8ea807a140e5
+
+  decodeHTMLEntities = (text) => {
+    const textArea = document.createElement('textarea');
+    textArea.innerHTML = text;
+    return textArea.value;
+  };
+
   scoreUpdate = () => {
     const { assertions, score } = this.state;
     const { dispatch } = this.props;
@@ -92,7 +100,9 @@ class Game extends Component {
                   <h2 data-testid="question-category">
                     {response[questionIndex].category}
                   </h2>
-                  <h2 data-testid="question-text">{response[questionIndex].question}</h2>
+                  <h2 data-testid="question-text">
+                    {this.decodeHTMLEntities(response[questionIndex].question)}
+                  </h2>
                   <div data-testid="answer-options" className="answers">
                     {this.shuffle(response[questionIndex].incorrect_answers
                       .concat(response[questionIndex].correct_answer))
@@ -111,7 +121,7 @@ class Game extends Component {
                           data-testid={ answer === response[questionIndex].correct_answer
                             ? 'correct-answer' : `wrong-answer-${index}` }
                         >
-                          {answer}
+                          {this.decodeHTMLEntities(answer)}
                         </button>))}
 
                   </div>
