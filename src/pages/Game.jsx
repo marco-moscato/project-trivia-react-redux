@@ -67,8 +67,6 @@ class Game extends Component {
 
   handleClick = ({ target: { value } }) => {
     const { response, questionIndex, assertions, score } = this.state;
-
-    console.log(value);
     if (value === response[questionIndex].correct_answer) {
       this.setState({
         assertions: assertions + 1,
