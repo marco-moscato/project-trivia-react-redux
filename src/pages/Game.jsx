@@ -21,6 +21,7 @@ class Game extends Component {
     const { history } = this.props;
     const token = localStorage.getItem('token');
     const api = await tQuestions(token);
+    this.startTimer();
     if (api.length === 0) {
       localStorage.removeItem('token');
       history.push('/');
@@ -42,6 +43,7 @@ class Game extends Component {
     const { questionIndex } = this.state;
     const { history } = this.props;
     const questionNumber = 4;
+    this.startTimer();
     if (questionIndex === questionNumber) { history.push('/feedback'); } else {
       this.setState({
         questionIndex: questionIndex + 1,
@@ -65,9 +67,9 @@ class Game extends Component {
     dispatch(updateScore(assertions, score));
   };
 
-  handleClick = ({ target: { value } }) => {
+  handleClick = (answer) => {
     const { response, questionIndex, assertions, score } = this.state;
-    if (value === response[questionIndex].correct_answer) {
+    if (answer === response[questionIndex].correct_answer) {
       this.setState({
         assertions: assertions + 1,
         score: score + 1,
@@ -85,7 +87,6 @@ class Game extends Component {
 
   render() {
     const { response, questionIndex, isLoading, answered, timeout } = this.state;
-    this.startTimer();
     return (
       <>
         <Header />
@@ -110,12 +111,12 @@ class Game extends Component {
                           key={ index }
                           value={ answer }
                           disabled={ timeout }
-                          onClick={ this.handleClick }
-                          style={ answered
-                            ? { border: answer === response[questionIndex]
-                              .correct_answer
-                              ? '3px solid rgb(6, 240, 15)' : '3px solid red' }
-                            : { border: '3px solid black' } }
+                          onClick={ () => this.handleClick(answer) }
+                          className={ `black-border 
+                          ${answered && answer === response[questionIndex].correct_answer
+                            && 'green-border'}
+                          ${answered && answer !== response[questionIndex].correct_answer
+                            && 'red-border'}` }
                           data-testid={ answer === response[questionIndex].correct_answer
                             ? 'correct-answer' : `wrong-answer-${index}` }
                         >

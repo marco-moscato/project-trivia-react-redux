@@ -29,14 +29,14 @@
   margin: 0.3rem;
 }
 
+.black-border {
+  border: 3px solid black;
+}
+
 .red-border {
   border: 3px solid red;
 }
 
 .green-border {
   border: 3px solid rgb(6, 240, 15);
-}
-
-.black-border {
-  border: 3px solid black;
 }
