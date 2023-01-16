@@ -1,63 +1,42 @@
-body {
+* {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  padding: 0.5rem;
 }
 
-.App {
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 20px;
   text-align: center;
 }
 
-.App-logo {
-  height: 15vmin;
-  pointer-events: none;
+.header {
+  align-items: center;
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+}
+
+.logo {
+  align-self: center;
+  width: 300px;
+}
+
+.answers > button {
+  font-size: 1.5rem;
+  margin: 0.3rem;
 }
 
 .red-border {
-  border: 1px solid red;
+  border: 3px solid red;
 }
 
 .green-border {
-  border: 1px solid green;
+  border: 3px solid rgb(6, 240, 15);
 }
 
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: shake infinite 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-  }
-}
-
-.App-header {
-  align-items: center;
-  background-color: #282c34;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
-  justify-content: center;
-  min-height: 100vh;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes shake {
-
-  10%, 90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-
-  20%, 80% {
-    transform: translate3d(2px, 0, 0);
-  }
-
-  30%, 50%, 70% {
-    transform: translate3d(-4px, 0, 0);
-  }
-
-  40%, 60% {
-    transform: translate3d(4px, 0, 0);
-  }
+.black-border {
+  border: 3px solid black;
 }

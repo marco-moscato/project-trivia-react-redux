@@ -2,6 +2,7 @@ import { USER_LOGIN,
   REQUEST_DATA_TRIVIA,
   REQUEST_DATA_TRIVIA_SUCCESS,
   REQUEST_DATA_TRIVIA_ERROR,
+  USER_SCORE_UPDATE,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -19,6 +20,13 @@ const player = (state = INITIAL_STATE, action) => {
       ...state,
       gravatarEmail: action.payload.email,
       name: action.payload.name,
+    };
+  }
+  case USER_SCORE_UPDATE: {
+    return {
+      ...state,
+      assertions: action.payload.assertions,
+      score: action.payload.score,
     };
   }
   case REQUEST_DATA_TRIVIA: {

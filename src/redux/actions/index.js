@@ -4,11 +4,16 @@ export const USER_LOGIN = 'USER_LOGIN';
 export const REQUEST_DATA_TRIVIA = 'REQUEST_DATA_TRIVIA';
 export const REQUEST_DATA_TRIVIA_SUCCESS = 'REQUEST_DATA_TRIVIA_SUCCESS';
 export const REQUEST_DATA_TRIVIA_ERROR = 'REQUEST_DATA_TRIVIA_ERROR';
+export const USER_SCORE_UPDATE = 'USER_SCORE_UPDATE';
 
 export const player = (email, name) => ({
   type: USER_LOGIN,
   payload: { email, name },
+});
 
+export const updateScore = (assertions, score) => ({
+  type: USER_SCORE_UPDATE,
+  payload: { assertions, score },
 });
 
 const requestDataTrivia = () => ({
