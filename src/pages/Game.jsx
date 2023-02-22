@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import md5 from 'crypto-js/md5';
 import Header from '../components/Header';
 import { tQuestions } from '../services/api';
 import Logo from '../trivia.png';
@@ -40,11 +41,21 @@ class Game extends Component {
   };
 
   handleNext = () => {
-    const { questionIndex } = this.state;
-    const { history } = this.props;
+    const { questionIndex, score } = this.state;
+    const { history, name, gravatarEmail } = this.props;
     const questionNumber = 4;
     this.startTimer();
-    if (questionIndex === questionNumber) { history.push('/feedback'); } else {
+    if (questionIndex === questionNumber) {
+      const ranking = JSON.parse(localStorage.getItem('ranking')) || [];
+      const toHash = md5(gravatarEmail).toString();
+      const newRanking = {
+        name,
+        picture: `https://www.gravatar.com/avatar/${toHash}`,
+        score,
+      };
+      localStorage.setItem('ranking', JSON.stringify([...ranking, newRanking]));
+      history.push('/feedback');
+    } else {
       this.setState({
         questionIndex: questionIndex + 1,
         answered: false,
@@ -149,4 +160,9 @@ Game.propTypes = {
   }),
 }.isRequired;
 
-export default connect()(Game);
+const mapStateToProps = (state) => ({
+  name: state.player.name,
+  gravatarEmail: state.player.gravatarEmail,
+});
+
+export default connect(mapStateToProps)(Game);
