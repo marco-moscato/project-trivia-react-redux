@@ -1,13 +1,42 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# Project Trivia React Redux
+Trivia is quiz game on a web application based on an API.
+It was part of my Web Development course at Trybe and the goal was to practice React with Redux, creating a store, reducers, actions, dispatchers, conecting Redux with React components and async actions. Also to practice testing with React Testing Library.
+It was developed in a group of students.
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+### Applied technologies
+> React, Redux, ES6, HTML5, CSS, Jest, RTL
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+## How to use
+### Clone locally
+```
+git@github.com:marco-moscato/project-trivia-react-redux.git
+```
+
+### Install dependencies
+```
+npm install
+```
+
+### Run application
+```
+npm start
+```
+
+### Testing
+```
+npm run cy
+```
+
+To check test coverage:
+```
+npm run test-coverage
+```
+### Credits
+Folders and files described bellow were developed by our team. All other files are credited to Trybe.
+
+project-trivia-react-redux/src
+    /components
+    /pages
+    /redux
+    /services
+    /tests
